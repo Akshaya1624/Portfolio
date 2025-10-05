@@ -1,0 +1,568 @@
+/* Custom Properties for easy color changes */
+:root {
+    /* Base Colors */
+    --primary-color: #007BFF; /* Vibrant Blue */
+    --secondary-color: #ffffff; /* White text on dark background */
+    --background-color: #000000f8; /* Deep Black/Near Black Background */
+    --card-background: #1a1a1a; /* Darker content boxes for contrast */
+    --accent-blue: #0056b3; /* Darker blue for hover */
+    --text-color: #e0e0e0; /* Lighter text for readability on dark */
+    
+    /* Custom Purple Accent for Avatar - NO LONGER USED, but kept in root for safety */
+    --purple-glow: #9333ea; 
+    --purple-light: #a855f7;
+}
+
+/* Base Styles & Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Changed font back to Poppins for consistency with your link */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif 
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- BEAUTIFUL BACKGROUND EFFECT (Starry Night) --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ensure you have an image named 'galaxy.jpg' in your 'images' folder */
+    background: url('images/galaxy.jpg') no-repeat center center / cover;
+    background-size: cover;
+    opacity: 0.3; /* Subtle background */
+    z-index: -1; /* Behind everything */
+    animation: star-animation 60s linear infinite; /* Slow, continuous movement */
+}
+
+@keyframes star-animation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+/* ------------------------------------------------ */
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+/* --- IMAGE-LIKE SECTION STYLING --- */
+section {
+    padding: 80px 10%;
+    min-height: 100vh;
+    font-weight: 300;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay for readability */
+    margin-bottom: 20px;
+    border-radius: 15px; /* Rounded corners for sections */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    transition: transform 0.4s ease-in-out;
+}
+
+section:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+}
+/* ------------------------------------- */
+
+h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--primary-color);
+    border-radius: 40px;
+    color: var(--card-background);
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+    border: 2px solid var(--primary-color);
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Header & Navigation */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    letter-spacing: 1px;
+}
+
+.navbar a {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 35px;
+    color: var(--secondary-color);
+    transition: 0.3s;
+    position: relative;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    width: 100%;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+}
+
+.download-btn {
+    margin-left: 35px;
+    padding: 10px 22px;
+}
+
+/* Home Section */
+.home {
+    justify-content: center;
+    text-align: center;
+    padding-top: 120px;
+}
+
+.home-content {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.home-content .greeting {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #c0c0c0;
+}
+
+.home-content .role {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    /* UPDATED: Typewriter Cursor Style */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide the content that overflows the box */
+    display: block;
+}
+
+.role > .wrap {
+    /* Style the blinking cursor */
+    border-right: 0.1em solid var(--secondary-color);
+}
+
+.home-content .summary {
+    margin: 0 auto 40px auto;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    max-width: 750px;
+}
+
+/* AVATAR STYLING (REMOVED) */
+.home-img {
+    display: none;
+}
+/* ------------------------------------------ */
+
+/* About Section Specifics */
+.about-content {
+    max-width: 900px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* --- SKILLS SECTION (Icons Only - Original Colors) --- */
+
+/* Hides the old grid/box container */
+.skills-container {
+    display: none; 
+}
+
+/* Main container for the icon list */
+.skills-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 40px; 
+    background: rgba(0, 0, 0, 0.4); 
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+}
+
+/* Category heading styles removed from HTML */
+.skills-content p {
+    display: none;
+}
+.skills-content p strong {
+    display: none;
+}
+
+.skill-icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 50px; 
+    margin: 0; 
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s;
+    padding: 10px; 
+    border-radius: 10px;
+    cursor: default; 
+}
+
+.skill-item:hover {
+    transform: translateY(-5px) scale(1.1); 
+    background: rgba(255, 255, 255, 0.05); /* Very subtle gray background lift */
+}
+
+.skill-item i {
+    font-size: 3.5rem; 
+    transition: text-shadow 0.3s;
+}
+
+/* Brand Colors for Icons (Updated) */
+.fab.fa-html5 { color: #E44D26; } /* HTML5 - Red/Orange */
+.fab.fa-css3-alt { color: #1572B6; } /* CSS3 - Blue */
+.fab.fa-js-square { color: #F7DF1E; } /* JavaScript - Yellow */
+.fab.fa-react { color: #61DAFB; } /* React.js - Sky Blue */
+.fab.fa-bootstrap { color: #7952B3; } /* Bootstrap - Purple */
+.fab.fa-java { color: #E62325; } /* Java - Red */
+.fab.fa-python { 
+    color: #3776AB; /* Python - Blue */
+    text-shadow: 0 0 5px #FFD43B; /* Yellow Glow for the secondary snake head/tail */
+} 
+.fab.fa-node-js { color: #339933; } /* Node.js - Green */
+
+/* --- CUSTOM COLORS FOR NON-BRAND ICONS --- */
+.fas.fa-server { color: #6C757D; } /* Express.js (Silver/Gray) */
+.fas.fa-database { color: #47A248; } /* MongoDB (Official Green) */
+.fas.fa-network-wired { color: #FF6600; } /* Networks (Orange) */
+.fas.fa-filter { color: #00A8A6; } /* Wireshark (Teal) */
+
+/* Hover: subtle white glow/shadow, keeps original color */
+.skill-item:hover i {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); 
+}
+/* ------------------------------------- */
+
+
+/* General Content Card Styling (Used only for Projects) */
+.project-card {
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s;
+    border-top: 5px solid var(--primary-color);
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Projects Section */
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+}
+
+.project-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #c0c0c0;
+}
+
+
+/* Internship & Certifications */
+.internship-content, .certs-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-left: 6px solid var(--primary-color);
+}
+
+.internship-content h3 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+.internship-content .duration {
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+}
+
+.internship-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.internship-content li, .certs-container li {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 25px;
+    font-size: 1.05rem;
+}
+
+.internship-content li::before, .certs-container li::before {
+    content: '\2022'; 
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    position: absolute;
+    left: 0;
+}
+
+.certs-container ul {
+    list-style: none;
+    font-size: 1.1rem;
+}
+
+
+/* Contact Section */
+.contact {
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+.contact p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    transition: 0.3s;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+}
+
+.icon-link:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.icon-link i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    transition: color 0.3s, filter 0.3s; 
+}
+
+/* --- BRAND COLOR OVERRIDES for Contacts (Final Request) --- */
+.contact-links .fab.fa-linkedin {
+    color: #0A66C2; /* LinkedIn Official Blue */
+}
+
+.contact-links .fab.fa-github {
+    color: var(--secondary-color); /* GitHub (White on Dark Background) */
+}
+
+/* Applied to both fas.fa-envelope (old) and fas.fa-envelope-open (new) */
+.contact-links .fas.fa-envelope-open, 
+.contact-links .fas.fa-envelope {
+    color: var(--secondary-color); /* Email (White/Black-White look) */
+}
+
+.contact-links .fas.fa-phone {
+    color: #25D366; /* Phone (Green) */
+}
+
+/* Apply consistent hover effects: Maintain original color and just brighten it */
+.icon-link:hover .fab.fa-linkedin,
+.icon-link:hover .fab.fa-github,
+.icon-link:hover .fas.fa-envelope-open,
+.icon-link:hover .fas.fa-phone {
+    filter: brightness(1.2); /* Brightens the existing color */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 10%;
+    background: #000;
+    color: #999;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 100;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .home {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .home-content {
+        max-width: 100%;
+        margin-top: 50px;
+    }
+    .home-content h1 {
+        font-size: 3.5rem;
+    }
+    .home-content .role {
+        font-size: 1.8rem;
+    }
+    .navbar a {
+        margin-left: 20px;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    section {
+        padding: 60px 5%;
+    }
+    .skills-content {
+        padding: 20px;
+    }
+    .skill-item i {
+        font-size: 2.5rem;
+    }
+    .skill-icon-list {
+        gap: 20px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+    .header {
+        justify-content: center;
+    }
+    .logo {
+        font-size: 1.6rem;
+    }
+    .home-content h1 {
+        font-size: 2.8rem;
+    }
+    .home-content .role {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    .btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+    .internship-content h3 {
+        font-size: 1.6rem;
+    }
+    .internship-content li, .certs-container li {
+        font-size: 0.95rem;
+    }
+    .contact-links {
+        gap: 20px;
+    }
+    .icon-link i {
+        font-size: 2.2rem;
+    }
+}

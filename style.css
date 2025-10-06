@@ -1,25 +1,25 @@
-/* Custom Properties for easy color changes */
+/* Custom Properties - UNCHANGED */
 :root {
-    /* Base Colors */
-    --primary-color: #007BFF; /* Vibrant Blue */
-    --secondary-color: #ffffff; /* White text on dark background */
-    --background-color: #000000f8; /* Deep Black/Near Black Background */
-    --card-background: #1a1a1a; /* Darker content boxes for contrast */
+    --primary-color: #007BFF; /* A vibrant blue that pops on black (used for borders) */
+    --secondary-color: #ffffff; /* White text/elements on dark background */
+    --background-color: #000000; /* Pure black main background */
+    --card-background: #1a1a1a; /* Dark content boxes for contrast */
     --accent-blue: #0056b3; /* Darker blue for hover */
     --text-color: #e0e0e0; /* Lighter text for readability on dark */
+    --dark-border-color: rgba(255, 255, 255, 0.1); /* Subtle white border for dark theme */
+    --shadow-color: rgba(0, 0, 0, 0.7); /* Darker shadows for dark theme */
     
     /* Custom Purple Accent for Avatar - NO LONGER USED, but kept in root for safety */
     --purple-glow: #9333ea; 
     --purple-light: #a855f7;
 }
 
-/* Base Styles & Reset */
+/* Base Styles & Reset (UNCHANGED) */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Changed font back to Poppins for consistency with your link */
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif 
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -31,7 +31,7 @@ body {
     z-index: 1;
 }
 
-/* --- BEAUTIFUL BACKGROUND EFFECT (Starry Night) --- */
+/* --- MAIN BACKGROUND: Black with WHITE Connecting Dots/Spark Pattern (UNCHANGED) --- */
 body::before {
     content: '';
     position: fixed;
@@ -39,30 +39,76 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Ensure you have an image named 'galaxy.jpg' in your 'images' folder */
-    background: url('images/galaxy.jpg') no-repeat center center / cover;
-    background-size: cover;
-    opacity: 0.3; /* Subtle background */
-    z-index: -1; /* Behind everything */
-    animation: star-animation 60s linear infinite; /* Slow, continuous movement */
+    z-index: -1; 
+    /* Purely CSS generated "connecting dots" pattern in WHITE on a transparent base */
+    background: 
+        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 3%),
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 3%),
+        linear-gradient(45deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-color: transparent;
+    opacity: 1;
+    animation: pattern-pan 60s linear infinite; 
 }
 
-@keyframes star-animation {
-    from {
-        background-position: 0% 0%;
+@keyframes pattern-pan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 40px 40px; }
+}
+/* ----------------------------------------------------------------- */
+
+
+/* --- Floating Particles/Bubbles Effect CSS - LIGHT BLUE WITH BLUE BORDERS --- */
+.bubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.bubbles span {
+    position: absolute;
+    bottom: -150px; 
+    
+    /* 💡 UPDATED: More vibrant blue (e.g., #6495ED - Cornflower Blue) with higher opacity (0.7) */
+    background: rgba(100, 149, 237, 0.7); 
+    
+    border-radius: 50%;
+    animation: floating 15s linear infinite; 
+    
+    /* Vibrant Blue border (using your existing --primary-color) */
+    border: 2px solid var(--primary-color);
+    
+    /* UPDATED: Stronger blue glow to emphasize the color */
+    box-shadow: 0 0 15px rgba(100, 149, 237, 1); /* Full opacity for the glow */
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
     }
-    to {
-        background-position: 100% 100%;
+    50% {
+        /* Peak opacity maintained at 0.5 */
+        opacity: 0.5; 
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.5); 
+        opacity: 0;
     }
 }
-/* ------------------------------------------------ */
+/* ------------------------------------------------- */
 
 a {
     text-decoration: none;
     color: var(--primary-color);
 }
 
-/* --- IMAGE-LIKE SECTION STYLING --- */
+/* --- SECTION STYLING --- */
 section {
     padding: 80px 10%;
     min-height: 100vh;
@@ -72,15 +118,20 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay for readability */
+    /* Semi-transparent dark overlay for sections, lets pattern show through */
+    background: rgba(0, 0, 0, 0.75); 
     margin-bottom: 20px;
-    border-radius: 15px; /* Rounded corners for sections */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    transition: transform 0.4s ease-in-out;
+    border-radius: 15px; 
+    /* Darker, more pronounced shadow */
+    box-shadow: 0 10px 30px var(--shadow-color); 
+    border: 1px solid var(--dark-border-color); /* Subtle white border */
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    z-index: 2; 
 }
 
 section:hover {
-    transform: translateY(-5px); /* Subtle lift on hover */
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 40px var(--shadow-color); /* Enhanced shadow on hover */
 }
 /* ------------------------------------- */
 
@@ -88,7 +139,7 @@ h2 {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 60px;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Primary blue for headings */
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -111,18 +162,19 @@ h2::after {
     padding: 14px 32px;
     background: var(--primary-color);
     border-radius: 40px;
-    color: var(--card-background);
+    color: var(--card-background); /* Dark text on blue button */
     font-weight: 600;
     letter-spacing: 1px;
     transition: 0.3s ease;
     border: 2px solid var(--primary-color);
     text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4); /* Subtle button shadow */
 }
 
 .btn:hover {
     background: var(--accent-blue);
     border-color: var(--accent-blue);
-    box-shadow: 0 0 15px var(--primary-color);
+    box-shadow: 0 0 20px var(--primary-color); /* Stronger glow on hover */
 }
 
 /* Header & Navigation */
@@ -132,19 +184,21 @@ h2::after {
     left: 0;
     width: 100%;
     padding: 20px 10%;
-    background: rgba(0, 0, 0, 0.8);
+    /* Dark background with blur for glassmorphism */
+    background: rgba(0, 0, 0, 0.7); 
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 15px var(--shadow-color); /* Darker shadow */
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle bottom border */
 }
 
 .logo {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* White text for logo */
     letter-spacing: 1px;
 }
 
@@ -152,7 +206,7 @@ h2::after {
     font-size: 1.1rem;
     font-weight: 500;
     margin-left: 35px;
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* White text for nav links */
     transition: 0.3s;
     position: relative;
 }
@@ -174,7 +228,7 @@ h2::after {
 }
 
 .navbar a:hover {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Blue on hover */
 }
 
 .download-btn {
@@ -198,36 +252,32 @@ h2::after {
 .home-content .greeting {
     font-size: 1.8rem;
     margin-bottom: 15px;
-    color: #c0c0c0;
+    color: #c0c0c0; /* Lighter grey */
 }
 
+/* Typewriter/Role Styles */
 .home-content .role {
     font-size: 2.5rem;
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* White for the role */
     margin-bottom: 25px;
-    /* UPDATED: Typewriter Cursor Style */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide the content that overflows the box */
+    white-space: nowrap; 
+    overflow: hidden; 
     display: block;
 }
 
 .role > .wrap {
     /* Style the blinking cursor */
-    border-right: 0.1em solid var(--secondary-color);
+    border-right: 0.1em solid var(--secondary-color); /* White cursor */
 }
+/* ------------------------------------------ */
 
 .home-content .summary {
     margin: 0 auto 40px auto;
     line-height: 1.8;
     font-size: 1.1rem;
+    color: var(--text-color); /* Light text */
     max-width: 750px;
 }
-
-/* AVATAR STYLING (REMOVED) */
-.home-img {
-    display: none;
-}
-/* ------------------------------------------ */
 
 /* About Section Specifics */
 .about-content {
@@ -235,9 +285,10 @@ h2::after {
     font-size: 1.1rem;
     line-height: 1.8;
     text-align: center;
+    color: var(--text-color); /* Light text */
 }
 
-/* --- SKILLS SECTION (Icons Only - Original Colors) --- */
+/* --- SKILLS SECTION (Styling for Icons and Images) --- */
 
 /* Hides the old grid/box container */
 .skills-container {
@@ -249,12 +300,12 @@ h2::after {
     max-width: 900px;
     margin: 0 auto;
     padding: 30px 40px; 
-    background: rgba(0, 0, 0, 0.4); 
+    background: var(--card-background); /* Dark card background */
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0 5px 15px var(--shadow-color); /* Darker shadow */
+    border: 1px solid var(--dark-border-color);
 }
 
-/* Category heading styles removed from HTML */
 .skills-content p {
     display: none;
 }
@@ -270,65 +321,115 @@ h2::after {
     margin: 0; 
 }
 
+/* Applied consistent dark background and hover effect to all skill tiles */
 .skill-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s, background 0.3s;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
     padding: 10px; 
     border-radius: 10px;
     cursor: default; 
+    
+    /* 💡 NEW: Give every skill item a dark background matching the card */
+    background: var(--card-background); /* #1a1a1a */
+    
+    /* Optional: Add a subtle border or shadow to emphasize the tile */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
 }
 
 .skill-item:hover {
     transform: translateY(-5px) scale(1.1); 
-    background: rgba(255, 255, 255, 0.05); /* Very subtle gray background lift */
+    /* NEW: Darker hover color and stronger shadow to make it pop */
+    background: #2a2a2a; 
+    box-shadow: 0 0 15px var(--primary-color);
 }
 
+
+/* Base style for Font Awesome icons */
 .skill-item i {
     font-size: 3.5rem; 
     transition: text-shadow 0.3s;
 }
 
-/* Brand Colors for Icons (Updated) */
-.fab.fa-html5 { color: #E44D26; } /* HTML5 - Red/Orange */
-.fab.fa-css3-alt { color: #1572B6; } /* CSS3 - Blue */
-.fab.fa-js-square { color: #F7DF1E; } /* JavaScript - Yellow */
-.fab.fa-react { color: #61DAFB; } /* React.js - Sky Blue */
-.fab.fa-bootstrap { color: #7952B3; } /* Bootstrap - Purple */
-.fab.fa-java { color: #E62325; } /* Java - Red */
-.fab.fa-python { 
-    color: #3776AB; /* Python - Blue */
-    text-shadow: 0 0 5px #FFD43B; /* Yellow Glow for the secondary snake head/tail */
-} 
-.fab.fa-node-js { color: #339933; } /* Node.js - Green */
+/* STYLES FOR IMAGE SKILLS */
+.skill-item img {
+    /* Set specific size to match the icons (3.5rem is approx 56px) */
+    width: 3.5rem; 
+    height: 3.5rem;
+    
+    /* Ensures image content fits within the boundaries without distortion */
+    object-fit: contain; 
 
-/* --- CUSTOM COLORS FOR NON-BRAND ICONS --- */
-.fas.fa-server { color: #6C757D; } /* Express.js (Silver/Gray) */
-.fas.fa-database { color: #47A248; } /* MongoDB (Official Green) */
-.fas.fa-network-wired { color: #FF6600; } /* Networks (Orange) */
-.fas.fa-filter { color: #00A8A6; } /* Wireshark (Teal) */
+    /* Center the image */
+    display: block; 
+    margin: 0 auto;
+
+    /* Ensure no blend mode is set by default */
+    background-blend-mode: normal !important; 
+    
+    /* Maintain the correct image color/brightness */
+    filter: none;
+    transition: filter 0.3s, transform 0.3s;
+}
+
+/* ⚠️ IMPORTANT: Apply background-blend-mode: multiply ONLY to images 
+   that have a stark white background and need it to disappear (Python/Wireshark)
+*/
+.skill-item img[src*="img7.svg"], /* Python */
+.skill-item img[src*="img9.webp"] /* Wireshark */
+{
+    background-blend-mode: multiply; 
+}
+
+/* Image Hover Effect: Subtle brightness lift and glow */
+.skill-item:hover img {
+    /* Apply a slight brightness lift and a soft glow to match the icon hover effect */
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.7)); 
+}
+
+
+/* Brand Colors for Icons (Maintain original colors, they pop nicely on black) */
+.fab.fa-html5 { color: #E44D26; } 
+.fab.fa-css3-alt { color: #1572B6; } 
+.fab.fa-js-square { color: #F7DF1E; } 
+.fab.fa-react { color: #61DAFB; } 
+.fab.fa-bootstrap { color: #7952B3; } 
+.fab.fa-java { color: #E62325; } 
+.fab.fa-python { 
+    color: #3776AB; 
+    text-shadow: 0 0 5px #FFD43B; 
+} 
+.fab.fa-node-js { color: #339933; } 
+
+/* CUSTOM COLORS FOR NON-BRAND ICONS */
+.fas.fa-server { color: #6C757D; } 
+.fas.fa-database { color: #47A248; } 
+.fas.fa-network-wired { color: #FF6600; } 
+.fas.fa-filter { color: #00A8A6; } 
 
 /* Hover: subtle white glow/shadow, keeps original color */
 .skill-item:hover i {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); 
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* White glow on hover */
 }
 /* ------------------------------------- */
 
 
 /* General Content Card Styling (Used only for Projects) */
 .project-card {
-    background: var(--card-background);
+    background: var(--card-background); /* Dark card background */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 15px var(--shadow-color); /* Darker shadow */
     transition: transform 0.3s;
     border-top: 5px solid var(--primary-color);
+    border: 1px solid var(--dark-border-color); /* Subtle white border */
 }
 
 .project-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 25px var(--shadow-color); /* Enhanced shadow on hover */
 }
 
 /* Projects Section */
@@ -348,7 +449,7 @@ h2::after {
 .project-card p {
     font-size: 1rem;
     line-height: 1.7;
-    color: #c0c0c0;
+    color: var(--text-color); /* Light text */
 }
 
 
@@ -356,25 +457,26 @@ h2::after {
 .internship-content, .certs-container {
     max-width: 850px;
     margin: 0 auto;
-    background: var(--card-background);
+    background: var(--card-background); /* Dark background */
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 20px var(--shadow-color); /* Darker shadow */
     border-left: 6px solid var(--primary-color);
+    border: 1px solid var(--dark-border-color); /* Subtle white border */
 }
 
 .internship-content h3 {
     margin-bottom: 25px;
     font-size: 2rem;
     color: var(--primary-color);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
     padding-bottom: 15px;
 }
 
 .internship-content .duration {
     font-size: 1.1rem;
     font-weight: normal;
-    color: #aaa;
+    color: #aaa; /* Lighter grey */
     display: block;
     margin-top: 5px;
 }
@@ -387,7 +489,7 @@ h2::after {
 .internship-content li, .certs-container li {
     margin-bottom: 15px;
     line-height: 1.7;
-    color: var(--text-color);
+    color: var(--text-color); /* Light text */
     position: relative;
     padding-left: 25px;
     font-size: 1.05rem;
@@ -421,6 +523,7 @@ h2::after {
     margin-bottom: 40px;
     max-width: 700px;
     line-height: 1.6;
+    color: var(--text-color); /* Light text */
 }
 
 .contact-links {
@@ -435,14 +538,14 @@ h2::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--text-color);
+    color: var(--text-color); /* Light text for icon labels */
     transition: 0.3s;
     font-size: 1.1rem;
     text-transform: capitalize;
 }
 
 .icon-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Blue on hover */
     transform: translateY(-5px);
 }
 
@@ -452,19 +555,18 @@ h2::after {
     transition: color 0.3s, filter 0.3s; 
 }
 
-/* --- BRAND COLOR OVERRIDES for Contacts (Final Request) --- */
+/* --- BRAND COLOR OVERRIDES for Contacts --- */
 .contact-links .fab.fa-linkedin {
     color: #0A66C2; /* LinkedIn Official Blue */
 }
 
 .contact-links .fab.fa-github {
-    color: var(--secondary-color); /* GitHub (White on Dark Background) */
+    color: var(--secondary-color); /* White for GitHub on dark background */
 }
 
-/* Applied to both fas.fa-envelope (old) and fas.fa-envelope-open (new) */
 .contact-links .fas.fa-envelope-open, 
 .contact-links .fas.fa-envelope {
-    color: var(--secondary-color); /* Email (White/Black-White look) */
+    color:#E62325; /* White for Email */
 }
 
 .contact-links .fas.fa-phone {
@@ -477,18 +579,10 @@ h2::after {
 .icon-link:hover .fas.fa-envelope-open,
 .icon-link:hover .fas.fa-phone {
     filter: brightness(1.2); /* Brightens the existing color */
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Subtle blue glow */
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 30px 10%;
-    background: #000;
-    color: #999;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 100;
-}
+/* FOOTER STYLES REMOVED */
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {

@@ -1,4 +1,4 @@
-// --- Typewriter Effect Script ---
+// --- Typewriter Effect Logic (UNCHANGED) ---
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -43,13 +43,13 @@ TxtType.prototype.tick = function() {
 };
 
 
-// Function to handle the active navigation link highlighting (from previous code)
+// Function to handle the active navigation link highlighting (UNCHANGED)
 function highlightActiveNavLink() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.navbar a');
     const scrollPosition = window.pageYOffset;
     
-    // Define the offset (adjust this value if your header height changes)
+    // Define the offset (header height)
     const headerOffset = 120; 
 
     sections.forEach(section => {
@@ -57,12 +57,10 @@ function highlightActiveNavLink() {
         const sectionHeight = section.clientHeight;
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            // Remove 'active' from all links
             navLinks.forEach(link => {
                 link.classList.remove('active');
             });
             
-            // Add 'active' to the corresponding link
             const targetLink = document.querySelector(`.navbar a[href="#${section.id}"]`);
             if (targetLink) {
                 targetLink.classList.add('active');
@@ -83,29 +81,62 @@ function highlightActiveNavLink() {
 }
 
 
-// Primary initialization when the window loads
+// --- Dynamic Background Bubbles Generation (INCREASED COUNT) ---
+function initializeBubbles() {
+    const bubblesContainer = document.querySelector('.bubbles');
+    if (bubblesContainer) {
+        // Generate 35 to 50 particles
+        const particleCount = 35 + Math.floor(Math.random() * 16); 
+        
+        for (let i = 0; i < particleCount; i++) {
+            const bubble = document.createElement('span');
+            
+            // Random size (30px to 80px)
+            const size = Math.random() * 50 + 30;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Random horizontal position
+            bubble.style.left = `${Math.random() * 100}%`;
+            
+            // Random animation duration (8s to 20s)
+            bubble.style.animationDuration = `${Math.random() * 12 + 8}s`; 
+            
+            // Random animation delay (up to 5s)
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            
+            bubblesContainer.appendChild(bubble);
+        }
+    }
+}
+
+
+// Primary initialization when the window loads (UNCHANGED)
 window.onload = function() {
     // 1. Initialize Typewriter Effect
     var elements = document.getElementById('typewriter-text');
     if (elements) {
+        // These are the roles that will be typed out
         var toRotate = ['Full Stack Developer', 'Java Developer', 'Cybersecurity Enthusiast'];
-        var period = 2000; // Time (in ms) to wait before deleting/starting next word
+        var period = 2000; 
         new TxtType(elements, toRotate, period);
     }
     
-    // 2. Run the highlight function immediately on load
+    // 2. Initialize Floating Bubbles Background (Crucial for bubbles to appear)
+    initializeBubbles();
+
+    // 3. Run the highlight function immediately on load
     highlightActiveNavLink();
     
-    // 3. Resume Download Link Functionality
+    // 4. Resume Download Link Functionality
     const resumeBtn = document.querySelector('.download-btn');
     if (resumeBtn) {
-        // Sets the path for the resume file you uploaded
-        resumeBtn.href = './Resume-Akshaya M.pdf';
+        resumeBtn.href = './images/Akshaya Resume.pdf';
     }
 };
 
 
-// Smooth Scrolling for all internal links (from previous code)
+// Smooth Scrolling for all internal links (UNCHANGED)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -123,5 +154,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// Event Listener for Scroll Highlighting (from previous code)
+// Event Listener for Scroll Highlighting (UNCHANGED)
 window.addEventListener('scroll', highlightActiveNavLink);

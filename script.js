@@ -128,7 +128,7 @@ window.onload = function() {
     // 4. Resume Download Link Functionality
     const resumeBtn = document.querySelector('.download-btn');
     if (resumeBtn) {
-        resumeBtn.href = './images/Akshaya Resume.pdf';
+        resumeBtn.href = './Akshaya Resume.pdf';
     }
 };
 

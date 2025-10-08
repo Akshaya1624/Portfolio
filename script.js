@@ -42,7 +42,6 @@ TxtType.prototype.tick = function() {
     }, delta);
 };
 
-
 // Function to handle the active navigation link highlighting (UNCHANGED)
 function highlightActiveNavLink() {
     const sections = document.querySelectorAll('section');
@@ -80,7 +79,6 @@ function highlightActiveNavLink() {
     }
 }
 
-
 // --- Dynamic Background Bubbles Generation (INCREASED COUNT) ---
 function initializeBubbles() {
     const bubblesContainer = document.querySelector('.bubbles');
@@ -110,7 +108,6 @@ function initializeBubbles() {
     }
 }
 
-
 // Primary initialization when the window loads (UNCHANGED)
 window.onload = function() {
     // 1. Initialize Typewriter Effect
@@ -135,7 +132,6 @@ window.onload = function() {
     }
 };
 
-
 // Smooth Scrolling for all internal links (UNCHANGED)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -152,7 +148,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
 
 // Event Listener for Scroll Highlighting (UNCHANGED)
 window.addEventListener('scroll', highlightActiveNavLink);
